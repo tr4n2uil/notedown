@@ -1,0 +1,16 @@
+#canvas:focus {
+  outline: none;
+}
+
+#canvas {
+  padding: 18px 0;
+}
+
+.navbar {
+  margin-bottom: -2px;
+}
+
+.container.border {
+  border: solid 1px #e7e7e7;
+  box-shadow: 0px 0px 25px #eee;
+}
