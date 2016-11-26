@@ -1,18 +1,29 @@
 $(document).ready(function(){
-  $('#canvas').css('height', $(window).height() - 50).focus();
-})
+  $('#container').css('min-height', $(window).height() - 50);
+  $('#canvas').css('min-height', $(window).height() - 50).focus();
+});
+
+$(document).on('click', 'a.trigger', function(){
+  if($(this).data('show')){
+    $('#' + $(this).data('show')).removeClass("hidden");
+  }
+  if($(this).data('hide')){
+    $('#' + $(this).data('hide')).addClass("hidden");
+  }
+  return false;
+});
 
 var lastKey = '', commands = [], pastEnter = 0;
 
-function process(command, push){
+function process(command, push, args){
   document.execCommand('delete', false, null);
-  document.execCommand(command, false, null);
+  document.execCommand(command, false, args || null);
   if(push) commands.push(command);
   return false;
 }
 
 $(document).on('keypress', 'div#canvas', function(e){
-  console.log("lastKey=" + lastKey + ' e.which=' + e.which + ' pastEnter=' + pastEnter);
+  // console.log("lastKey=" + lastKey + ' e.which=' + e.which + ' pastEnter=' + pastEnter);
   if(e.which == 32 && pastEnter == 1){
     switch(lastKey){
       case 98: // b

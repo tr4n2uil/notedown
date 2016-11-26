@@ -43,12 +43,12 @@
           </button>
           <a class="navbar-brand large" href=""><strong>note</strong>down</a>
         </div>
+        <p class="navbar-text">easy note taking</p>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="#">home</a></li>
-            <li><a href="#">help</a></li>
+            <li><a href="#" class="trigger" data-show="help" data-hide="canvas">help</a></li>
             <li><a href="https://github.com/tr4n2uil/notedown">github</a></li>
           </ul>
         </div>
@@ -56,8 +56,32 @@
     </nav>
 
     <section>
-      <div class="container container-fluid border">
+      <div class="container container-fluid border" id="container">
         <div contenteditable="true" id="canvas" autofocus></div>
+        <div id="help" class="hidden row">
+          <div class="clearfix"><a href="#" class="pull-right trigger" data-show="canvas" data-hide="help"><span class="glyphicon glyphicon-remove"></span></a></div>
+          <div class="col-md-offset-2 col-md-8">
+            <p class="jumbo">Welcome</p>
+            <p class="bigger">notedown lets you take down notes.</p>
+            <p class="bigger">fast and beautiful.</p>
+            <br />
+            <br />
+            <br />
+            <p class="big">At the heart of notedown lies the simple idea - one-key shortcuts activated by space.</p>
+            <p>Shortcut keys are checked only as the first key in the line, so you decide formatting of line first, type a space and voila, start typing beautifully! The formatting gets deactivated on next line. So next time you take down notes, type faster than normal giving every detail to formatting. </p>
+            <p>Available Shortcuts:</p>
+            <table class="table table-bordered">
+              <thead><th>Key</th><th>Shortcut for</th></thead>
+              <tbody>
+                <tr><td>b</td><td>bold</td></tr>
+                <tr><td>i</td><td>italic</td></tr>
+                <tr><td>u</td><td>underline</td></tr>
+                <tr><td>*</td><td>unordered list</td></tr>
+                <tr><td>+</td><td>ordered list</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </section>
   </body>
