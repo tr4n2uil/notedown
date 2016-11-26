@@ -37,7 +37,7 @@ a {
 }
 
 #help .glyphicon {
-  font-size: 2em;
+  font-size: 1em;
 }
 
 #help .jumbo {
@@ -50,4 +50,8 @@ a {
 
 #help .big {
   font-size: 1.2em;
+}
+
+#help .close {
+  margin-top: 1em;
 }

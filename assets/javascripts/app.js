@@ -10,6 +10,7 @@ $(document).on('click', 'a.trigger', function(){
   if($(this).data('hide')){
     $('#' + $(this).data('hide')).addClass("hidden");
   }
+  $('#canvas').focus();
   return false;
 });
 
