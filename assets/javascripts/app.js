@@ -40,8 +40,7 @@ $(document).on('click', 'span.note-remove', function(){
   if(confirm('Are you sure you want to delete this note?')){
     var id = $(this).parent().data('id').toString();
     var order = notedown.order.indexOf(id);
-    notedown.current = order - 1;
-    notedown.currentState = notedown.states[notedown.current];
+    renderContent($(this).parent().prev())
     delete notedown.states[id];
     delete notedown.order.splice(order, 1);
     $(this).parent().remove();
@@ -52,6 +51,8 @@ $(document).on('click', 'span.note-remove', function(){
 $(document).on('click', 'span.note-edit', function(){
   var id = $(this).parent().data('id').toString();
   var title = prompt('Enter New Title', notedown.states[id].title);
+  if(!title) return;
+
   notedown.states[id].title = title;
   renderContent(renderNote(id, $(this).parent().next()));
   $(this).parent().remove();
@@ -162,12 +163,16 @@ function saveStorage(){
 }
 
 $(document).on('click', '#new-note', function(){
+  var d = new Date();
+  var title = prompt("Enter Title", d.toString().substring(0, 21));
+  if(!title) return;
+
   saveCurrent();
   notedown.id++;
   var current = notedown.id.toString()
   notedown.order.push(current);
   notedown.states[current] = notedown.states[current] || {
-    title: prompt("Enter Title"),
+    title: title,
     contents: '',
     commands: [],
     pastEnter: 0,
