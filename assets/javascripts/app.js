@@ -36,6 +36,28 @@ $(document).on('click', 'a.trigger', function(){
   return false;
 });
 
+$(document).on('click', 'span.note-remove', function(){
+  if(confirm('Are you sure you want to delete this note?')){
+    var id = $(this).parent().data('id').toString();
+    var order = notedown.order.indexOf(id);
+    notedown.current = order - 1;
+    notedown.currentState = notedown.states[notedown.current];
+    delete notedown.states[id];
+    delete notedown.order.splice(order, 1);
+    $(this).parent().remove();
+  }
+  return false;
+});
+
+$(document).on('click', 'span.note-edit', function(){
+  var id = $(this).parent().data('id').toString();
+  var title = prompt('Enter New Title', notedown.states[id].title);
+  notedown.states[id].title = title;
+  renderContent(renderNote(id, $(this).parent().next()));
+  $(this).parent().remove();
+  return false;
+});
+
 function process(command, push, args){
   document.execCommand('delete', false, null);
   document.execCommand(command, false, args || null);
@@ -43,8 +65,12 @@ function process(command, push, args){
   return false;
 }
 
-$(document).on('keydown', 'div#canvas', function(e){
+function markDirty(){
   $('#save-status').removeClass('glyphicon-ok green').addClass('glyphicon-flash red');
+}
+
+$(document).on('keydown', 'div#canvas', function(e){
+  markDirty();
   if(e.which == 8) notedown.currentState.pastEnter = 0;
 });
 
@@ -110,7 +136,7 @@ function placeCaretAtEnd(id) {
 }
 
 function renderNote(id, newNode){
-  return $('<button type="button" class="list-group-item notes" data-id="'+id+'">'+notedown.states[id].title+'</button>').insertBefore(newNode);
+  return $('<button type="button" class="list-group-item notes hover" data-id="'+id+'">'+notedown.states[id].title+ (id != "0" ? '<span class="note-remove pull-right hover-target glyphicon glyphicon-remove danger"></span>' : '') + '<span class="note-edit pull-right hover-target glyphicon glyphicon-pencil"></span></button>').insertBefore(newNode);
 }
 
 function saveCurrent(){
@@ -138,16 +164,19 @@ function saveStorage(){
 $(document).on('click', '#new-note', function(){
   saveCurrent();
   notedown.id++;
-  notedown.current = notedown.id.toString()
-  notedown.order.push(notedown.current);
-  notedown.currentState = notedown.states[notedown.current] = notedown.states[notedown.current] || {
-    title: 'untitled notes ' + notedown.current,
+  var current = notedown.id.toString()
+  notedown.order.push(current);
+  notedown.states[current] = notedown.states[current] || {
+    title: prompt("Enter Title"),
     contents: '',
     commands: [],
     pastEnter: 0,
     lastKey: ''
   };
-  renderNote(notedown.current, $(this)).click();
+  renderNote(current, $(this)).click();
+  notedown.current = current;
+  notedown.currentState = notedown.states[current]
+  markDirty();
 });
 
 $(document).on('click', 'button.list-group-item.notes', function(){

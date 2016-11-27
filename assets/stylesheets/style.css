@@ -76,3 +76,27 @@ a {
 .red {
   color: red;
 }
+
+.blue {
+  color: blue;
+}
+
+.danger {
+  color: #a94442;
+}
+
+.info {
+  color: #31708f;
+}
+
+.hover .hover-target {
+  display: none
+}
+
+.hover:hover .hover-target {
+  display: inline-block;
+}
+
+.note-edit {
+  margin-right: 8px;
+}
