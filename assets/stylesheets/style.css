@@ -68,3 +68,11 @@ a {
 #sidebar .list-group-item.current {
   border-right: solid 2px black;
 }
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}

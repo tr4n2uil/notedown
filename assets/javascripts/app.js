@@ -43,6 +43,11 @@ function process(command, push, args){
   return false;
 }
 
+$(document).on('keydown', 'div#canvas', function(e){
+  $('#save-status').removeClass('glyphicon-ok green').addClass('glyphicon-flash red');
+  if(e.which == 8) notedown.currentState.pastEnter = 0;
+});
+
 $(document).on('keypress', 'div#canvas', function(e){
   // console.log("lastKey=" + notedown.currentState.lastKey + ' e.which=' + e.which + ' pastEnter=' + notedown.currentState.pastEnter);
   if(e.which == 32 && notedown.currentState.pastEnter == 1){
@@ -122,6 +127,14 @@ function renderContent(el){
   placeCaretAtEnd('canvas');
 }
 
+function saveStorage(){
+  console.log('saving ...');
+  saveCurrent();
+  localStorage.notedown = JSON.stringify(notedown);
+  console.log('saved!');
+  $('#save-status').removeClass('glyphicon-flash red').addClass('glyphicon-ok green');
+}
+
 $(document).on('click', '#new-note', function(){
   saveCurrent();
   notedown.id++;
@@ -138,15 +151,11 @@ $(document).on('click', '#new-note', function(){
 });
 
 $(document).on('click', 'button.list-group-item.notes', function(){
+  saveCurrent();
   renderContent(this);
 });
 
-setInterval(function(){
-  console.log('saving ...');
-  saveCurrent();
-  localStorage.notedown = JSON.stringify(notedown);
-  console.log('saved!');
-}, 10000);
+setInterval(saveStorage, 10000);
 
 // GA Tracking
 $(document).ready( function(){
@@ -159,3 +168,7 @@ $(document).ready( function(){
   ga('create', 'UA-47160625-1', 'vibhaj.com');
   ga('send', 'pageview');
 });
+
+window.onbeforeunload = function(e) {
+  saveStorage();
+};
