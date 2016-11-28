@@ -3,7 +3,7 @@
   font-size: 2em;
 }
 
-.navbar-default, #help, #sidebar {
+.navbar-default, #sidebar, .page {
   font-weight: 200;
 }
 
@@ -28,7 +28,7 @@ a {
   color: #777;
 }
 
-#canvas, #help {
+#canvas, .page {
   padding: 18px;
 }
 
@@ -36,23 +36,23 @@ a {
   border-left: solid 1px #e7e7e7;
 }
 
-#help .glyphicon {
+.page .glyphicon {
   font-size: 1em;
 }
 
-#help .jumbo {
+.page .jumbo {
   font-size: 5em;
 }
 
-#help .bigger {
+.page .bigger {
   font-size: 2.5em;
 }
 
-#help .big {
+.page .big {
   font-size: 1.2em;
 }
 
-#help .close {
+.page .close {
   margin-top: 1em;
 }
 

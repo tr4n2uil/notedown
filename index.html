@@ -49,7 +49,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" class="trigger" data-show="help" data-hide="main">help</a></li>
+            <li><a href="#" class="trigger" data-show="#privacy" data-hide="#main,#help">privacy</a></li>
+            <li><a href="#" class="trigger" data-show="#help" data-hide="#main,#privacy">help</a></li>
             <li><a href="https://github.com/tr4n2uil/notedown">github</a></li>
           </ul>
         </div>
@@ -67,9 +68,9 @@
           <div class="col-md-8" contenteditable="true" id="canvas" autofocus></div>
         </div>
 
-        <div id="help" class="hidden row">
+        <div id="help" class="page hidden row">
           <div class="col-md-offset-2 col-md-8">
-            <a href="#" class="pull-right trigger close" data-show="main" data-hide="help"><span class="glyphicon glyphicon-remove"></span></a>
+            <a href="#" class="pull-right trigger close" data-show="#main" data-hide="#help,#privacy"><span class="glyphicon glyphicon-remove"></span></a>
             <p class="jumbo">Welcome</p>
             <p class="bigger">notedown lets you take down notes.</p>
             <p class="bigger">fast and beautiful.</p>
@@ -77,7 +78,7 @@
             <br />
             <br />
             <p class="big">At the heart of notedown lies the simple idea - one-key shortcuts activated by space.</p>
-            <p>Shortcut keys are checked only as the first key in the line, so you decide formatting of line first, type a space and voila, start typing beautifully! The formatting gets deactivated on next line. So next time you take down notes, type faster than normal giving every detail to formatting. </p>
+            <p class="big">Shortcut keys are checked only as the first key in the line, so you decide formatting of line first, type a space and voila, start typing beautifully! The formatting gets deactivated on next line. So next time you take down notes, type faster than normal giving every detail to formatting. </p>
             <p>Available Shortcuts:</p>
             <table class="table table-bordered">
               <thead><th>Key</th><th>Shortcut for</th></thead>
@@ -89,6 +90,17 @@
                 <tr><td>+</td><td>ordered list</td></tr>
               </tbody>
             </table>
+          </div>
+        </div>
+
+        <div id="privacy" class="page hidden row">
+          <div class="col-md-offset-2 col-md-8">
+            <a href="#" class="pull-right trigger close" data-show="#main" data-hide="#privacy,#help"><span class="glyphicon glyphicon-remove"></span></a>
+            <p class="jumbo">Privacy</p>
+            <p class="bigger">notedown uses HTML5 localStorage.</p>
+            <br />
+            <p class="big">that means all your data are stored within your browser.</p>
+            <p class="big">No data is sent to servers. We care for our users privacy :)</p>
           </div>
         </div>
       </div>

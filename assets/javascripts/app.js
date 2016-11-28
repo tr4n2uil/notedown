@@ -26,10 +26,10 @@ $(document).ready(function(){
 
 $(document).on('click', 'a.trigger', function(){
   if($(this).data('show')){
-    $('#' + $(this).data('show')).removeClass("hidden");
+    $($(this).data('show')).removeClass("hidden");
   }
   if($(this).data('hide')){
-    $('#' + $(this).data('hide')).addClass("hidden");
+    $($(this).data('hide')).addClass("hidden");
   }
   $('#canvas').focus();
   return false;
