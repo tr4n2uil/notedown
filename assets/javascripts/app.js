@@ -19,9 +19,11 @@ $(document).ready(function(){
   $('#container, #sidebar').css('min-height', $(window).height() - 50);
   $('#canvas').css('min-height', $(window).height() - 50).focus();
   placeCaretAtEnd('canvas');
+  var current = notedown.current;
   for(var i in notedown.order){
     renderContent(renderNote(notedown.order[i], $('#new-note')));
   }
+  renderContent($('.notes[data-id='+current+']'));
 });
 
 $(document).on('click', 'a.trigger', function(){
