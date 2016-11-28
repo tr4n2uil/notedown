@@ -35,8 +35,16 @@ $(document).on('click', 'a.trigger', function(){
   return false;
 });
 
-$(document).on('click', 'span.note-remove', function(){
-  if(confirm('Are you sure you want to delete this note?')){
+$(document).on('click', '.note-cancel', function(){
+  var id = $(this).parent().data('id').toString();
+  renderContent(renderNote(id, $(this).parent().next()));
+  $(this).parent().remove();
+  $('#canvas').focus();
+  return false;
+});
+
+$(document).on('click', '.note-remove', function(){
+  if($(this).parent().hasClass('list-group-item-danger')){
     var id = $(this).parent().data('id').toString();
     var order = notedown.order.indexOf(id);
     renderContent($(this).parent().prev())
@@ -44,18 +52,34 @@ $(document).on('click', 'span.note-remove', function(){
     delete notedown.order.splice(order, 1);
     $(this).parent().remove();
   }
+  else {
+    $(this).parent().addClass('list-group-item-danger');
+  }
   return false;
 });
 
-$(document).on('click', 'span.note-edit', function(){
-  var id = $(this).parent().data('id').toString();
-  var title = prompt('Enter New Title', notedown.states[id].title);
-  if(!title) return;
+$(document).on('click', '.note-edit', function(){
+  if($(this).parent().hasClass('list-group-item-info')){
+    var id = $(this).parent().data('id').toString();
+    var title = $(this).parent().children('.note-title').text();
+    if(!title) return;
 
-  notedown.states[id].title = title;
-  renderContent(renderNote(id, $(this).parent().next()));
-  $(this).parent().remove();
+    notedown.states[id].title = title;
+    renderContent(renderNote(id, $(this).parent().next()));
+    $(this).parent().remove();
+  }
+  else {
+    $(this).parent().addClass('list-group-item-info');
+    $(this).parent().children('.note-title').attr("contenteditable", true).selectText();
+  }
   return false;
+});
+
+$(document).on('keydown', 'span.note-title', function(e){
+  if(e.which == 13){
+    $(this).parent().children('.note-edit').click();
+    return false;
+  }
 });
 
 function process(command, args){
@@ -107,6 +131,23 @@ $(document).on('keypress', 'div#canvas', function(e){
   notedown.currentState.lastKey = e.which;
 });
 
+jQuery.fn.selectText = function(){
+  var doc = document;
+  var element = this[0];
+  console.log(this, element);
+  if (doc.body.createTextRange) {
+    var range = document.body.createTextRange();
+    range.moveToElementText(element);
+    range.select();
+  } else if (window.getSelection) {
+    var selection = window.getSelection();
+    var range = document.createRange();
+    range.selectNodeContents(element);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
+};
+
 function placeCaretAtEnd(id) {
   var el = document.getElementById(id)
   el.focus();
@@ -145,7 +186,7 @@ function reformat(id){
 }
 
 function renderNote(id, newNode){
-  return $('<button type="button" class="list-group-item notes hover" data-id="'+id+'">'+notedown.states[id].title+ (id != "0" ? '<span class="note-remove pull-right hover-target glyphicon glyphicon-remove danger"></span>' : '') + '<span class="note-edit pull-right hover-target glyphicon glyphicon-pencil"></span></button>').insertBefore(newNode);
+  return $('<button type="button" class="list-group-item notes hover" data-id="'+id+'"><span class="note-title">'+notedown.states[id].title+'</span>'+ (id != "0" ? '<input class="note-remove pull-right confirm-target btn btn-default" type="button" value="DELETE" /></span><span class="note-remove pull-right hover-target glyphicon glyphicon-remove danger"></span>' : '') + '<input class="note-edit pull-right confirm-target btn btn-default" type="button" value="SAVE" /><span class="note-edit pull-right hover-target glyphicon glyphicon-pencil"></span><input class="note-cancel pull-right confirm-target btn btn-default" type="button" value="CANCEL" /></button>').insertBefore(newNode);
 }
 
 function saveCurrent(){
@@ -193,7 +234,8 @@ $(document).on('click', '#new-note', function(){
 
 $(document).on('click', 'button.list-group-item.notes', function(){
   saveCurrent();
-  renderContent(this);
+  if(!$(this).hasClass('list-group-item-info'))
+    renderContent(this);
 });
 
 setInterval(saveStorage, 10000);

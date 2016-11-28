@@ -11,7 +11,7 @@
   color: black;
 }
 
-#canvas:focus, #sidebar .list-group-item:focus {
+#canvas:focus, #sidebar .list-group-item:focus, .note-title:focus {
   outline: none;
 }
 
@@ -99,4 +99,30 @@ a {
 
 .note-edit {
   margin-right: 8px;
+}
+
+.list-group-item-danger .hover-target,
+.list-group-item-info .hover-target {
+  display: none
+}
+
+.list-group-item-danger:hover .hover-target,
+.list-group-item-info:hover .hover-target {
+  display: none
+}
+
+.list-group-item-danger .confirm-target,
+.list-group-item-info .confirm-target,
+.hover .confirm-target {
+  display: none;
+}
+
+.list-group-item-danger:hover .confirm-target.note-remove,
+.list-group-item-danger:hover .confirm-target.note-cancel,
+.list-group-item-info:hover .confirm-target.note-edit,
+.list-group-item-info:hover .confirm-target.note-cancel {
+  display: inline-block;
+  padding: 0;
+  width: 80px;
+  margin-top: -2px;
 }
