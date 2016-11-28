@@ -138,7 +138,7 @@ $(document).on('keypress', 'div#canvas', function(e){
 jQuery.fn.selectText = function(){
   var doc = document;
   var element = this[0];
-  console.log(this, element);
+  // console.log(this, element);
   if (doc.body.createTextRange) {
     var range = document.body.createTextRange();
     range.moveToElementText(element);
