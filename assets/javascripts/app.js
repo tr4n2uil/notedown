@@ -5,8 +5,7 @@ localStorage.notedown = localStorage.notedown || JSON.stringify({
   states: {
     "0": {
       title: "untitled notes",
-      contents: '',
-      commands: [],
+      contents: '<div>FAST LINE FORMATTING</div><div><br></div><div><u>At beginning of a line:</u></div><div><u><br></u></div><div>type "b " to start typing in&nbsp;<b>bold</b></div><div>type "i&nbsp;"&nbsp;to start typing in&nbsp;<i>italic</i><br></div><div>type "u&nbsp;"&nbsp;to start typing in&nbsp;<u>underline</u><br></div><div><u><br></u></div><div><ul><li>type "* " for bulleted list</li></ul><div><ol><li>type "+ " for numbered list</li></ol><div><br></div></div></div>',
       pastEnter: 0,
       lastKey: ''
     }
@@ -59,10 +58,9 @@ $(document).on('click', 'span.note-edit', function(){
   return false;
 });
 
-function process(command, push, args){
+function process(command, args){
   document.execCommand('delete', false, null);
   document.execCommand(command, false, args || null);
-  if(push) notedown.currentState.commands.push(command);
   return false;
 }
 
@@ -76,17 +74,18 @@ $(document).on('keydown', 'div#canvas', function(e){
 });
 
 $(document).on('keypress', 'div#canvas', function(e){
-  // console.log("lastKey=" + notedown.currentState.lastKey + ' e.which=' + e.which + ' pastEnter=' + notedown.currentState.pastEnter);
+  console.log("lastKey=" + notedown.currentState.lastKey + ' e.which=' + e.which + ' pastEnter=' + notedown.currentState.pastEnter);
+  if(notedown.currentState.pastEnter == 0) reformat('canvas');
   if(e.which == 32 && notedown.currentState.pastEnter == 1){
     switch(notedown.currentState.lastKey){
       case 98: // b
-        return process('bold', true);
+        return process('bold');
 
       case 105: // i
-        return process('italic', true);
+        return process('italic');
 
       case 117: // u
-        return process('underline', true);
+        return process('underline');
 
       case 43: // +
         return process('insertOrderedList');
@@ -100,22 +99,13 @@ $(document).on('keypress', 'div#canvas', function(e){
   }
 
   if(e.which == 13){
-    resetFormat();
+    notedown.currentState.pastEnter = 0;
   } else {
     notedown.currentState.pastEnter++;
   }
 
   notedown.currentState.lastKey = e.which;
 });
-
-function resetFormat(){
-  // console.log("resetFormat", notedown.currentState.commands);
-  for(var i in notedown.currentState.commands){
-    document.execCommand(notedown.currentState.commands[i], false, null);
-  }
-  notedown.currentState.commands = [];
-  notedown.currentState.pastEnter = 0;
-}
 
 function placeCaretAtEnd(id) {
   var el = document.getElementById(id)
@@ -134,6 +124,24 @@ function placeCaretAtEnd(id) {
     textRange.collapse(false);
     textRange.select();
   }
+}
+
+function reformat(id){
+  document.execCommand('insertText', false, 'h');
+  var s = window.getSelection();
+  var range = s.getRangeAt(0);
+
+  var clone = range.cloneRange();
+  clone.setStart(range.startContainer, range.startOffset - 1);
+  clone.setEnd(range.startContainer, range.startOffset);
+  s.removeAllRanges();
+  s.addRange(clone);
+  document.execCommand('removeFormat', false, null);
+
+  range.collapse(false);
+  s.removeAllRanges();
+  s.addRange(range);
+  document.execCommand('delete', false, null);
 }
 
 function renderNote(id, newNode){
@@ -164,7 +172,7 @@ function saveStorage(){
 
 $(document).on('click', '#new-note', function(){
   var d = new Date();
-  var title = prompt("Enter Title", d.toString().substring(0, 21));
+  var title = d.toString().substring(0, 21);
   if(!title) return;
 
   saveCurrent();
@@ -174,7 +182,6 @@ $(document).on('click', '#new-note', function(){
   notedown.states[current] = notedown.states[current] || {
     title: title,
     contents: '',
-    commands: [],
     pastEnter: 0,
     lastKey: ''
   };
