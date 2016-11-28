@@ -238,7 +238,7 @@ $(document).on('click', 'button.list-group-item.notes', function(){
     renderContent(this);
 });
 
-setInterval(saveStorage, 10000);
+setInterval(saveStorage, 60000);
 
 // GA Tracking
 $(document).ready( function(){
