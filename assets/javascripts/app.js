@@ -15,7 +15,7 @@ localStorage.notedown = localStorage.notedown || JSON.stringify({
 var notedown = JSON.parse(localStorage.notedown);
 
 $(document).ready(function(){
-  console.log(localStorage.notedown);
+  // console.log(localStorage.notedown);
   $('#container, #sidebar').css('min-height', $(window).height() - 50);
   $('#canvas').css('min-height', $(window).height() - 50).focus();
   placeCaretAtEnd('canvas');
@@ -93,12 +93,16 @@ function markDirty(){
 }
 
 $(document).on('keydown', 'div#canvas', function(e){
+  // console.log("lastKey=" + notedown.currentState.lastKey + ' e.which=' + e.which + e.metaKey + ' pastEnter=' + notedown.currentState.pastEnter);
   markDirty();
   if(e.which == 8) notedown.currentState.pastEnter = 0;
+  if(e.which == 83 && e.metaKey){
+    saveStorage();
+    return false;
+  }
 });
 
 $(document).on('keypress', 'div#canvas', function(e){
-  console.log("lastKey=" + notedown.currentState.lastKey + ' e.which=' + e.which + ' pastEnter=' + notedown.currentState.pastEnter);
   if(notedown.currentState.pastEnter == 0) reformat('canvas');
   if(e.which == 32 && notedown.currentState.pastEnter == 1){
     switch(notedown.currentState.lastKey){
@@ -204,10 +208,10 @@ function renderContent(el){
 }
 
 function saveStorage(){
-  console.log('saving ...');
+  // console.log('saving ...');
   saveCurrent();
   localStorage.notedown = JSON.stringify(notedown);
-  console.log('saved!');
+  // console.log('saved!');
   $('#save-status').removeClass('glyphicon-flash red').addClass('glyphicon-ok green');
 }
 
@@ -236,6 +240,7 @@ $(document).on('click', 'button.list-group-item.notes', function(){
   saveCurrent();
   if(!$(this).hasClass('list-group-item-info'))
     renderContent(this);
+  markDirty();
 });
 
 setInterval(saveStorage, 60000);

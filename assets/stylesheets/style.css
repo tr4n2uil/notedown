@@ -32,6 +32,10 @@ a {
   padding: 18px;
 }
 
+#canvas {
+  border-left: solid 1px #e7e7e7;
+}
+
 #help .glyphicon {
   font-size: 1em;
 }
@@ -54,7 +58,7 @@ a {
 
 #sidebar {
   padding: 0;
-  border: solid 1px #e7e7e7;
+  border-top: solid 1px #e7e7e7;
 }
 
 #sidebar .list-group-item:first-child, #sidebar .list-group-item:last-child {
