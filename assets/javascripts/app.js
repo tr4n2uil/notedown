@@ -5,7 +5,7 @@ localStorage.notedown = localStorage.notedown || JSON.stringify({
   states: {
     "0": {
       title: "untitled notes",
-      contents: '<div>FAST LINE FORMATTING</div><div><br></div><div><u>At beginning of a line:</u></div><div><u><br></u></div><div>type "b " to start typing in&nbsp;<b>bold</b></div><div>type "i&nbsp;"&nbsp;to start typing in&nbsp;<i>italic</i><br></div><div>type "u&nbsp;"&nbsp;to start typing in&nbsp;<u>underline</u><br></div><div><u><br></u></div><div><ul><li>type "* " for bulleted list</li></ul><div><ol><li>type "+ " for numbered list</li></ol><div><br></div></div></div>',
+      contents: '<div>FAST LINE FORMATTING</div><div><br></div><div><u>At beginning of a line:</u></div><div><u><br></u></div><div>simply type "b" then a space to set the line to bold and start typing in&nbsp;<b>bold</b></div><br/><div>type "i&nbsp;"&nbsp;to start typing in&nbsp;<i>italic</i><br></div><div>type "u&nbsp;"&nbsp;to start typing in&nbsp;<u>underline</u><br></div><div><u><br></u></div><div><ul><li>type "* " for bulleted list</li></ul><div><ol><li>type "+ " for numbered list</li></ol><div><br></div></div></div>',
       pastEnter: 0,
       lastKey: ''
     }
@@ -76,6 +76,12 @@ $(document).on('click', '.note-edit', function(){
   }
   return false;
 });
+
+$(document).on('click', '.note-snapshot', function(){
+  snapshotToEmail();
+  return false;
+});
+
 
 $(document).on('keydown', 'span.note-title', function(e){
   if(e.which == 13){
@@ -192,7 +198,7 @@ function reformat(id){
 }
 
 function renderNote(id, newNode){
-  return $('<button type="button" class="list-group-item notes hover" data-id="'+id+'"><span class="note-title">'+notedown.states[id].title+'</span>'+ (id != "0" ? '<input class="note-remove pull-right confirm-target btn btn-default" type="button" value="DELETE" /></span><span class="note-remove pull-right hover-target glyphicon glyphicon-remove danger"></span>' : '') + '<input class="note-edit pull-right confirm-target btn btn-default" type="button" value="SAVE" /><span class="note-edit pull-right hover-target glyphicon glyphicon-pencil"></span><input class="note-cancel pull-right confirm-target btn btn-default" type="button" value="CANCEL" /></button>').insertBefore(newNode);
+  return $('<button type="button" class="list-group-item notes hover" data-id="'+id+'"><span class="note-title">'+notedown.states[id].title+'</span>'+ (id != "0" ? '<input class="note-remove pull-right confirm-target btn btn-default" type="button" value="DELETE" /></span><span class="note-remove pull-right hover-target glyphicon glyphicon-remove danger" title="Delete"></span>' : '') + '<input class="note-edit pull-right confirm-target btn btn-default" type="button" value="SAVE" /><span class="note-edit pull-right hover-target glyphicon glyphicon-pencil" title="Edit"></span><input class="note-cancel pull-right confirm-target btn btn-default" type="button" value="CANCEL" /><span class="note-snapshot pull-right hover-target glyphicon glyphicon-envelope" title="Send snapshot to email"></span></button>').insertBefore(newNode);
 }
 
 function saveCurrent(){
@@ -262,3 +268,16 @@ $(document).ready( function(){
 window.onbeforeunload = function(e) {
   saveStorage();
 };
+
+function popupCenter(url, title, w, h) {
+  var left = (screen.width/2)-(w/2);
+  var top = (screen.height/2)-(h/2);
+  return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+};
+
+function snapshotToEmail(){
+  $('#canvas').selectText();
+  document.execCommand('copy', false, null);
+  placeCaretAtEnd('canvas');
+  popupCenter("mailto:?subject="+encodeURIComponent(notedown.currentState['title']+" | notedown snapshots"), 'Archive notes to email', 800, 600);
+}

@@ -101,8 +101,8 @@ a {
   display: inline-block;
 }
 
-.note-edit {
-  margin-right: 8px;
+.note-edit, .note-snapshot {
+  margin-right: 12px;
 }
 
 .list-group-item-danger .hover-target,
