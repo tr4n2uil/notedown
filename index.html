@@ -27,6 +27,7 @@
 
     <script type='text/javascript' src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous'></script>
+    <script src="https://use.fontawesome.com/103ea08ba5.js"></script>
 
     <script type='text/javascript' src='assets/javascripts/app.js'></script>
   </head>
@@ -48,10 +49,24 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav" id="tools">
+            <li><a href="#" class="execute" data-cmd="bold"><span class="fa fa-bold"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="italic"><span class="fa fa-italic"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="underline"><span class="fa fa-underline"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="insertOrderedList"><span class="fa fa-list-ol"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="insertUnorderedList"><span class="fa fa-list-ul"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="insertHtml" data-args='<input type="checkbox" />&nbsp;&nbsp;'><span class="fa fa-check-square-o"></span></a></li>
+          </ul>
+
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" class="trigger" data-show="#privacy" data-hide="#main,#help">privacy</a></li>
-            <li><a href="#" class="trigger" data-show="#help" data-hide="#main,#privacy">help</a></li>
-            <li><a href="https://github.com/tr4n2uil/notedown">github</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">about <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" class="trigger" data-show="#privacy" data-hide="#main,#help">privacy</a></li>
+                <li><a href="#" class="trigger" data-show="#help" data-hide="#main,#privacy">help</a></li>
+                <li><a href="https://github.com/tr4n2uil/notedown">github</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
@@ -88,6 +103,7 @@
                 <tr><td>u</td><td>underline</td></tr>
                 <tr><td>*</td><td>unordered list</td></tr>
                 <tr><td>+</td><td>ordered list</td></tr>
+                <tr><td>t</td><td>check box</td></tr>
               </tbody>
             </table>
             <br />

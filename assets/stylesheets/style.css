@@ -130,3 +130,8 @@ a {
   width: 80px;
   margin-top: -2px;
 }
+
+.tool-active {
+  color: black !important;
+  /*background-color: #e7e7e7;*/
+}
