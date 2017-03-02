@@ -132,6 +132,6 @@ a {
 }
 
 .tool-active {
-  color: black !important;
+  color: orange !important;
   /*background-color: #e7e7e7;*/
 }
