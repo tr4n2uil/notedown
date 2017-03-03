@@ -42,6 +42,7 @@ $(document).on('click', 'a.execute', function(){
     execute($(this).data('cmd'), $(this).data('args'));
     refreshTools();
   }
+  $('#canvas').focus();
   return false;
 });
 
@@ -128,6 +129,7 @@ $(document).on('mouseup', 'div#canvas', function(e){
 
 $(document).on('keydown', 'div#canvas', function(e){
   // console.log("lastKey=" + notedown.currentState.lastKey + ' e.which=' + e.which + e.metaKey + ' pastEnter=' + notedown.currentState.pastEnter);
+  // console.log(e.target, $(this));
   refreshTools();
   markDirty();
   if(e.which == 8) notedown.currentState.pastEnter = 0;
@@ -312,3 +314,32 @@ function snapshotToEmail(){
   placeCaretAtEnd('canvas');
   popupCenter("mailto:?subject="+encodeURIComponent(notedown.currentState['title']+" | notedown snapshots"), 'Archive notes to email', 800, 600);
 }
+
+$(document).on('click', '.add-col', function(){
+  $(this).parent().find('table tr').append('<td></td>');
+  return false;
+});
+
+$(document).on('click', '.rem-col', function(){
+  $(this).parent().find('table tr').find('td:last').remove();
+  return false;
+});
+
+$(document).on('click', '.add-row', function(){
+  var p = $(this).parent();
+  var tds = p.find('table tr:last td').length;
+  p.find('table tr:last').after('<tr></tr>');
+  for(var i=0; i< tds; i++)
+    p.find('table tr:last').append('<td>&nbsp;</td>')
+  return false;
+});
+
+$(document).on('click', '.rem-row', function(){
+  $(this).parent().find('table tr:last').remove();
+  return false;
+});
+
+$(document).on('click', '.todo li', function(e){
+  // console.log(e.offsetX, $(this).get(0).offsetWidth);
+  if(e.offsetX < 30) $(this).toggleClass('done');
+});

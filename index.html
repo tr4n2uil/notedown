@@ -33,7 +33,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -50,12 +50,25 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav" id="tools">
-            <li><a href="#" class="execute" data-cmd="bold"><span class="fa fa-bold"></span></a></li>
-            <li><a href="#" class="execute" data-cmd="italic"><span class="fa fa-italic"></span></a></li>
-            <li><a href="#" class="execute" data-cmd="underline"><span class="fa fa-underline"></span></a></li>
-            <li><a href="#" class="execute" data-cmd="insertOrderedList"><span class="fa fa-list-ol"></span></a></li>
-            <li><a href="#" class="execute" data-cmd="insertUnorderedList"><span class="fa fa-list-ul"></span></a></li>
-            <li><a href="#" class="execute" data-cmd="insertHtml" data-args='<input type="checkbox" />&nbsp;&nbsp;'><span class="fa fa-check-square-o"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="bold" title="bold"><span class="fa fa-bold"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="italic" title="italic"><span class="fa fa-italic"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="underline" title="underline"><span class="fa fa-underline"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="insertOrderedList" title="ordered list"><span class="fa fa-list-ol"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="insertUnorderedList" title="unordered list"><span class="fa fa-list-ul"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="insertHtml" data-args='<div class="todo"><input type="checkbox" />&nbsp;&nbsp;</div>' title="checkbox"><span class="fa fa-check-square-o"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="insertHtml" data-args='<div class="todo"><ul><li>&nbsp;</li></ul></div>' title="checkbox"><span class="fa fa-check-square-o"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="insertHtml" data-args='<div class="table-editor"><div class="add-col"><span class="fa fa-plus-square-o"></span></div><div class="rem-col"><span class="fa fa-minus-square-o"></span></div><div class="add-row"><span class="fa fa-plus-square-o"></span></div><div class="rem-row"><span class="fa fa-minus-square-o"></span></div><table class="table table-bordered"><tbody><tr><td>&nbsp;</td></tr></tbody></table></div>' title="table"><span class="fa fa-table"></span></a></li>
+
+            <li><a href="#" class="execute" data-cmd="indent" title="indent"><span class="fa fa-indent"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="outdent" title="outdent"><span class="fa fa-outdent"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="justifyleft" title="align left"><span class="fa fa-align-left"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="justifycenter" title="align center"><span class="fa fa-align-center"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="justifyright" title="align right"><span class="fa fa-align-right"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="justifyfull" title="align justify"><span class="fa fa-align-justify"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="superscript" title="superscript"><span class="fa fa-superscript"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="subscript" title="subscript"><span class="fa fa-subscript"></span></a></li>
+            <li><a href="#" class="execute" data-cmd="strikethrough" title="strikethrough"><span class="fa fa-strikethrough"></span></a></li>
+
           </ul>
 
           <ul class="nav navbar-nav navbar-right">

@@ -20,6 +20,7 @@
 }
 
 .container.border {
+  margin-top: 49px;
   border: solid 1px #e7e7e7;
   box-shadow: 0px 0px 25px #eee;
 }
@@ -134,4 +135,90 @@ a {
 .tool-active {
   color: orange !important;
   /*background-color: #e7e7e7;*/
+}
+
+.table {
+  width: inherit;
+  margin-right: 20px;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  padding: 2px 10px;
+  min-width: 75px;
+}
+
+.table-editor {
+  position: relative;
+  display: inline-block;
+}
+
+.add-col {
+  position: absolute;
+  right: 3px;
+  top: -4px;
+  display: none;
+  cursor: pointer;
+}
+
+
+.rem-col {
+  position: absolute;
+  right: 3px;
+  top: 12px;
+  display: none;
+  cursor: pointer;
+}
+
+.add-row {
+  position: absolute;
+  bottom: -2px;
+  display: none;
+  cursor: pointer;
+}
+
+.rem-row {
+  position: absolute;
+  bottom: -2px;
+  left: 15px;
+  display: none;
+  cursor: pointer;
+}
+
+.table-editor:hover .add-row, .table-editor:hover .rem-row, .table-editor:hover .add-col, .table-editor:hover .rem-col {
+  display: inline;
+}
+
+.todo ul {
+  -webkit-padding-start: 0;
+}
+
+.todo ul li {
+  list-style-type: none;
+  position: relative;
+  margin: 2px;
+  padding-left: 2em;
+}
+
+.todo ul li::before {
+  content: '\f096';
+  font: normal normal normal 14px/1 FontAwesome;
+  position: absolute;
+  color: lightgray;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /*border-color: lightgray;*/
+  /*border-style: solid;*/
+  /*border-width: 0 0.2em 0.2em 0;*/
+  height: 1em;
+  top: 1.3em;
+  left: 0.6em;
+  margin-top: -1em;
+  /*transform: rotate(45deg);*/
+  width: 0.5em;
+  cursor: pointer;
+}
+
+.todo ul li.done::before {
+  content: '\f046';
+  color: #009933;
 }
