@@ -19,7 +19,7 @@
     <meta name='apple-mobile-web-app-capable' content='yes'>
     <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'>
 
-    <title>notedown &mdash; easy note taking app</title>
+    <title>notedown &mdash; next generation text processing</title>
 
     <link rel='shortcut icon' href='assets/images/notedown-logo.png' >
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>
@@ -44,11 +44,14 @@
           </button>
           <a class="navbar-brand large" href=""><strong>note</strong>down</a>
         </div>
-        <p class="navbar-text">easy note taking app</p>
-        <p class="navbar-text"><span class="glyphicon glyphicon-ok green" id="save-status" title="Saved Status"></span></p>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="/" class="active" title="easy notes">easy notes</a></li>
+            <li><a href="#" title="save status"><span class="glyphicon glyphicon-ok green" id="save-status"></span></a></li>
+          </ul>
+
           <ul class="nav navbar-nav" id="tools">
             <li><a href="#" class="execute" data-cmd="bold" title="bold"><span class="fa fa-bold"></span></a></li>
             <li><a href="#" class="execute" data-cmd="italic" title="italic"><span class="fa fa-italic"></span></a></li>
@@ -80,7 +83,6 @@
               <ul class="dropdown-menu">
                 <li><a href="#" class="trigger" data-show="#privacy" data-hide="#main,#help">privacy</a></li>
                 <li><a href="#" class="trigger" data-show="#help" data-hide="#main,#privacy">help</a></li>
-                <li><a href="https://github.com/tr4n2uil/notedown">github</a></li>
               </ul>
             </li>
           </ul>
