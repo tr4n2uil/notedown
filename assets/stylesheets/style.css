@@ -132,6 +132,10 @@ a {
   margin-top: -2px;
 }
 
+#tools {
+  margin-left: 8em;
+}
+
 .tool-active {
   color: orange !important;
   /*background-color: #e7e7e7;*/
@@ -221,4 +225,8 @@ a {
 .todo ul li.done::before {
   content: '\f046';
   color: #009933;
+}
+
+.dropdown-menu {
+  min-width: inherit;
 }
