@@ -6,8 +6,6 @@ localStorage.notedown = localStorage.notedown || JSON.stringify({
     "0": {
       title: "untitled notes",
       contents: '<div>FAST LINE FORMATTING</div><div><br></div><div><u>At beginning of a line:</u></div><div><u><br></u></div><div>simply type "b" then a space to set the line to bold and start typing in&nbsp;<b>bold</b></div><br/><div>type "i&nbsp;"&nbsp;to start typing in&nbsp;<i>italic</i><br></div><div>type "u&nbsp;"&nbsp;to start typing in&nbsp;<u>underline</u><br></div><div><u><br></u></div><div><ul><li>type "* " for bulleted list</li></ul></div><div><ol><li>type "+ " for numbered list</li></ol></div><div><input type="checkbox" />&nbsp;&nbsp;type "t " for checkbox</div><br/><br/><br/></div></div></div>',
-      pastEnter: 0,
-      lastKey: ''
     }
   }
 });
@@ -128,52 +126,13 @@ $(document).on('mouseup', 'div#canvas', function(e){
 });
 
 $(document).on('keydown', 'div#canvas', function(e){
-  // console.log("lastKey=" + notedown.currentState.lastKey + ' e.which=' + e.which + e.metaKey + ' pastEnter=' + notedown.currentState.pastEnter);
   // console.log(e.target, $(this));
   refreshTools();
   markDirty();
-  if(e.which == 8) notedown.currentState.pastEnter = 0;
   if(e.which == 83 && e.metaKey){
     saveStorage();
     return false;
   }
-});
-
-$(document).on('keypress', 'div#canvas', function(e){
-  // console.log("lastKey=" + notedown.currentState.lastKey + ' e.which=' + e.which + e.metaKey);
-  if(notedown.currentState.pastEnter == 0) reformat('canvas');
-  if(e.which == 32 && notedown.currentState.pastEnter == 1){
-    switch(notedown.currentState.lastKey){
-      case 98: // b
-        return process('bold');
-
-      case 105: // i
-        return process('italic');
-
-      case 117: // u
-        return process('underline');
-
-      case 43: // +
-        return process('insertOrderedList');
-
-      case 42: // *
-        return process('insertUnorderedList');
-
-      case 116: // t
-        return process('insertHtml', '<input type="checkbox" />&nbsp;&nbsp;');
-
-      default:
-        break;
-    }
-  }
-
-  if(e.which == 13){
-    notedown.currentState.pastEnter = 0;
-  } else {
-    notedown.currentState.pastEnter++;
-  }
-
-  notedown.currentState.lastKey = e.which;
 });
 
 jQuery.fn.selectText = function(){
@@ -267,9 +226,7 @@ $(document).on('click', '#new-note', function(){
   notedown.order.push(current);
   notedown.states[current] = notedown.states[current] || {
     title: title,
-    contents: '',
-    pastEnter: 0,
-    lastKey: ''
+    contents: ''
   };
   renderNote(current, $(this)).click();
   notedown.current = current;
