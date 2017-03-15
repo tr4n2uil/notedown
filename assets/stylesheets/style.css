@@ -247,6 +247,10 @@ a {
   width: 0.5em;
 }
 
+#sidebar .current .note-title {
+  font-weight: bolder;
+}
+
 #sidebar .current .note-title::before {
   color: black;
   font-weight: bold;
