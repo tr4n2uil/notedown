@@ -230,6 +230,28 @@ a {
   min-width: inherit;
 }
 
+#sidebar .note-title {
+  padding-left: 15px;
+  position: relative;
+}
+
+#sidebar .note-title::before {
+  content: '\f0f6';
+  font: normal normal normal 14px/1 FontAwesome;
+  position: absolute;
+  color: lightgray;
+  height: 1em;
+  top: 1.15em;
+  left: -0.35em;
+  margin-top: -1em;
+  width: 0.5em;
+}
+
+#sidebar .current .note-title::before {
+  color: black;
+  font-weight: bold;
+}
+
 @media print {
   #canvas { border-left: none; }
   .container.border { border: none;}
