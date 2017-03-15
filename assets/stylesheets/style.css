@@ -158,7 +158,7 @@ a {
 .add-col {
   position: absolute;
   right: 3px;
-  top: -4px;
+  top: -3px;
   display: none;
   cursor: pointer;
 }
@@ -167,22 +167,22 @@ a {
 .rem-col {
   position: absolute;
   right: 3px;
-  top: 12px;
+  top: 10px;
   display: none;
   cursor: pointer;
 }
 
 .add-row {
   position: absolute;
-  bottom: -2px;
+  bottom: -10px;
   display: none;
   cursor: pointer;
 }
 
 .rem-row {
   position: absolute;
-  bottom: -2px;
-  left: 15px;
+  bottom: -10px;
+  left: 12px;
   display: none;
   cursor: pointer;
 }
@@ -192,7 +192,7 @@ a {
 }
 
 .todo ul {
-  -webkit-padding-start: 0;
+  -webkit-padding-start: 20px;
 }
 
 .todo ul li {

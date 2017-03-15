@@ -126,9 +126,13 @@ $(document).on('mouseup', 'div#canvas', function(e){
 });
 
 $(document).on('keydown', 'div#canvas', function(e){
-  // console.log(e.target, $(this));
+  console.log(e.which, $(this));
   refreshTools();
   markDirty();
+  if(e.which == 9){
+    execute(e.shiftKey ? 'outdent' : 'indent');
+    return false;
+  }
   if(e.which == 83 && e.metaKey){
     saveStorage();
     return false;
@@ -273,7 +277,7 @@ function snapshotToEmail(){
 }
 
 $(document).on('click', '.add-col', function(){
-  $(this).parent().find('table tr').append('<td></td>');
+  $(this).parent().find('table tr').append('<td style="padding: 2px 3px; vertical-align: bottom; min-width: 100px;">&nbsp;</td>');
   return false;
 });
 
@@ -285,9 +289,9 @@ $(document).on('click', '.rem-col', function(){
 $(document).on('click', '.add-row', function(){
   var p = $(this).parent();
   var tds = p.find('table tr:last td').length;
-  p.find('table tr:last').after('<tr></tr>');
+  p.find('table tr:last').after('<tr style="height: 20px;"></tr>');
   for(var i=0; i< tds; i++)
-    p.find('table tr:last').append('<td>&nbsp;</td>')
+    p.find('table tr:last').append('<td style="padding: 2px 3px; vertical-align: bottom; min-width: 100px;">&nbsp;</td>')
   return false;
 });
 
@@ -299,4 +303,10 @@ $(document).on('click', '.rem-row', function(){
 $(document).on('click', '.todo li', function(e){
   // console.log(e.offsetX, $(this).get(0).offsetWidth);
   if(e.offsetX < 30) $(this).toggleClass('done');
+  // if($(this).hasClass('done')){
+  //   $(this).css('text-decoration', 'line-through');
+  // }
+  // else {
+  //   $(this).css('text-decoration', 'none');
+  // }
 });
