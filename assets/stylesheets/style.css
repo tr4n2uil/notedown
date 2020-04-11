@@ -132,7 +132,7 @@ a {
 }
 
 #tools {
-  margin-left: 8em;
+  margin-left: 3em;
 }
 
 .tool-active {
@@ -258,7 +258,7 @@ a {
 
 @media print {
   #canvas { border-left: none; }
-  .container.border { border: none;}
+  .container.border { border: none; margin-top: 0; }
 
   .col-print-1 { width:8.3333333333%;  float:left; }
   .col-print-2 { width:16.6666666667%; float:left; }
